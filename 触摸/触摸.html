@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            border:1px solid red;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="box">
+
+    </div>
+</body>
+</html>
+<script>
+
+    var box=document.querySelector(".box");
+    window.onload=function () {
+        timeOutEvent = 0;
+        box.addEventListener("touchstart",function (e) {
+            timeOutEvent = setTimeout("longPress()",1000);
+            e.preventDefault();
+        })
+        box.addEventListener("touchmove",function () {
+            clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+        })
+        box.addEventListener("touchend",function () {
+            clearTimeout(timeOutEvent);
+            if(timeOutEvent!=0){
+                alert("你这是点击，不是长按");
+            }
+            return false;
+        })
+    }
+    function longPress() {
+        timeOutEvent = 0;
+        box.style.background="purple"
+    }
+</script>
