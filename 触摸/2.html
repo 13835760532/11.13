@@ -7,83 +7,100 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .wheel{
+
+        .banner{
             width: 100%;
-            height: 300px;
+            height:300px;
             overflow: hidden;
         }
+
         .box{
             width:400%;
-            height:100%;
+            height:100%
         }
-        .box img{
+        .box div{
             width: 25%;
             height: 100%;
             float: left;
         }
+        .box div:nth-child(1){
+            background: darkred;
+        }
+
+        .box div:nth-child(2){
+            background: yellowgreen;
+        }
+        .box div:nth-child(3){
+            background: #0D8BBD;
+        }.box div:nth-child(4){
+             background:palevioletred;
+         }
+
     </style>
     <script src="touch.js"></script>
     <script src="zepto.min.js"></script>
-
-
     <script>
-        $(function(){
-            var widths=$(".box img").width();
-            var les=$(".box img").length;
-            $(".wheel").mousedown(function(e){
-                e.preventDefault();  //阻止浏览器的默认行为
+        $(function () {
+            $(".box").mousedown(function (e) {
+                e.preventDefault
+
             })
-            $(".wheel").mousemove(function(e){
-                e.preventDefault();
+            $(".box").mousemove(function (e) {
+                e.preventDefault
+
             })
-            var marginLeft;
+            var marginL;
             var num=0;
-            touch.on("body","dragstart",".box",function(e){
-                $(".box").css({
-                    transition:"null"
-                })
+            var wid=$(".box div").width();
+            touch.on("body","dragstart",".box",function (e) {
                 marginL=parseInt($(".box").css("marginLeft"))?parseInt($(".box").css("marginLeft")):0;
-            })
-            touch.on("body","drag",".box",function(e){
                 $(".box").css({
-                    marginLeft:marginL+e.x
+                    transform:"none"
                 })
             })
-            touch.on("body","dragend",".box",function(e){
+            touch.on("body","drag",".box",function (e) {
+                $(".box").css({
+                    marginLeft:e.x+marginL
+
+                })
+
+            })
+            touch.on("body","dragend",".box",function (e) {
                 if(Math.abs(e.x)>100){
                     if(e.direction=="left"){
                         num++;
-                        if(num==les){
-                            num=les-1;
+                        if(num==4){
+                            num=3
                         }
                     }else if(e.direction=="right"){
                         num--;
                         if(num==-1){
-                            num=0;
+                            num=0
                         }
                     }
                     $(".box").css({
-                        marginLeft:-num*widths,
+                        marginLeft:-num*wid,
                         transition:"margin 1s ease"
                     })
                 }else{
                     $(".box").css({
-                        marginLeft:-num*widths,
+                        marginLeft:-num*wid,
                         transition:"marginLeft 1s ease"
                     })
                 }
+
             })
         })
     </script>
 </head>
 <body>
-   <div class="wheel">
-       <div class="box">
-           <img src="img/1.jpg" alt="">
-           <img src="img/2.jpg" alt="">
-           <img src="img/3.jpg" alt="">
-           <img src="img/4.jpg" alt="">
-       </div>
-   </div>
+    <div class="banner">
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
 </body>
 </html>
