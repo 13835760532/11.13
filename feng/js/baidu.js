@@ -117,8 +117,66 @@ $(window).resize(function(){
         flag2=true;
     }
 })
+    //滚轮
+    var flag3=true;
+    $(document).on("mousewheel",function (e) {
+        var e=e||window.event;
+        var wheel=e.tedatl||e.wheelDelta;
+        if(wheel==3||wheel==120){
+            if(!flag3){
+                return;
+            }
+            num++;
+            var les=$("section").length;
+            if(num==les){
+                num=les-1;
+                return;
+            }
+            $(".fullpage").css("marginTop",-num*h);
+            $(".list").removeClass("active");
+            $(".list").eq(num).addClass("active");
+            flag3=false;
+        }else if(wheel==-3||wheel==-120){
+            if(!flag3){
+                return;
+            }
+            num--;
+            if(num==-1){
+                num=0;
+                return;
+            }
+            $(".fullpage").css("marginTop",-num*h);
+            $(".list").removeClass("active");
+            $(".list").eq(num).addClass("active");
+            flag3=false;
+        }
 
+    })
+    $(".fullpage")[0].addEventListener("webkitTransitionEnd",function() {
+        flag3 = true;
+    })
+    $(".list").click(function () {
+       var index=$(".list").index(this);
+       num=index;
+        $(".list").removeClass("active");
+        $(".list").eq(index).addClass("active");
+        $(".fullpage").css({
+            marginTop:-num*h,
+            transition:"margin-top .7s ease"
+        })
+    })
 
-
+    $(".arrow").click(function(){
+        num++;
+        if(num==$(".arrow").length+1){
+            num=$(".arrow").length;
+        }
+        $(".fullpage").css({
+            marginTop:-num*h,
+            transition:"margin-top .7s ease"
+        })
+        $(".list").removeClass("active");
+        $(".list").eq(num).addClass("active");
+    })
 
 })

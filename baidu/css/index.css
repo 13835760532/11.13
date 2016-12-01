@@ -661,13 +661,14 @@ header{
         width: 100%;
         height:500px;
         position: absolute;
-        left:0;right: 0;top:0;bottom: 0;
-        margin: auto;
+        left:0;top:100px;
+        background: red;
+
     }
     .right-box #login{
         position: absolute;
-        left:300px;right: 0;top:0;
-        margin:0 auto;
+        left:0;right: 0;top:0;bottom: 0;
+        margin:auto;
     }
 }
 @media screen and (min-width: 1000px) {
